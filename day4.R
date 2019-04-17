@@ -36,4 +36,36 @@ print(v|t)
 v <- c(3,0,TRUE,2+2i)
 print(!v)
 
+#&& and运算符
+v <- c(3,0,TRUE,2+2i)
+t <- c(1,3,TRUE,2+3i)
+print(v&&t)
 
+#|| or
+v <- c(0,0,TRUE,2+2i)
+t <- c(0,3,TRUE,2+3i)
+print(v||t)
+
+#左分配
+v1 <- c(3,1,TRUE,2+3i)
+v2 <<- c(3,1,TRUE,2+3i)
+v3 = c(3,1,TRUE,2+3i)
+print(v1)
+print(v2)
+print(v3)
+
+# ：和python类似
+v <- 2:8
+print(v) 
+
+# %in%表示元素是否属于向量
+v1 <- 8
+v2 <- 12
+t <- 1:10
+print(v1 %in% t) 
+print(v2 %in% t) 
+
+# %*% 矩阵与其转制相乘
+M = matrix( c(2,6,5,1,10,4), nrow = 2,ncol = 3,byrow = TRUE)
+t = M %*% t(M)
+print(t)
