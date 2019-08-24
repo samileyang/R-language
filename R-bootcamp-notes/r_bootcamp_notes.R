@@ -85,3 +85,37 @@ gapminder_with_extra_vars <- gapminder %>%
          sd_pop = sd(pop)) %>%
   arrange(desc(year), continent)
 head(gapminder_with_extra_vars)
+
+library(tidyr)
+gap_wide <- read.csv("gapminder_wide.csv",stringsAsFactors =  FALSE)
+head(gap_wide)
+
+#gather()
+gap_long <- gap_wide %>%
+  gather(obstype_year,obs_values,3:38)
+head(gap_long)
+
+gap_long <- gap_wide %>%
+  gather(obstype_year, obs_values, starts_with('pop'),
+         starts_with('lifeExp'), starts_with('gdpPercap'))
+head(gap_long)
+
+gap_long <- gap_wide %>% 
+  gather(obstype_year, obs_values, -continent, -country)
+head(gap_long)
+
+gap_long_sep <- gap_long %>% 
+  separate(obstype_year, into = c('obs_type','year'), sep = "_") %>% 
+  mutate(year = as.integer(year))
+head(gap_long_sep)
+
+gapminder <- read.csv("gapminder-FiveYearData.csv")
+head(gap_medium)
+head(gapminder)
+
+gap_medium <- gap_medium[,names(gapminder)]
+head(gap_medium)
+
+gap_medium <- gap_long_sep %>% 
+  spread(obs_type, obs_values)
+head(gap_medium)
